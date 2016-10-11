@@ -4,7 +4,7 @@ apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.3   "
+    buildToolsVersion "24.0.3"
     defaultConfig {
         applicationId "net.kibotu.kalmanrx.app"
         minSdkVersion 15
@@ -71,6 +71,23 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':lib')
     compile 'com.android.support:appcompat-v7:24.2.1'
+
+    // device utils
+    compile 'com.github.kibotu:net.kibotu.android.deviceinfo:1.2.1'
+
+    // view utils
+    compile 'com.github.kibotu:common.android.utils:0.6.7'
+
+    // linq
+    compile 'br.com.zbra:android-linq:1.0.1'
+
+    // view binding
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+
+    // chart
+    compile 'com.jjoe64:graphview:4.2.1'
+
 }
 
 retrolambda {
