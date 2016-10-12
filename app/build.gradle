@@ -21,8 +21,8 @@ android {
             shrinkResources = false
         }
         release {
-            minifyEnabled true
-            shrinkResources = true
+            minifyEnabled false
+            shrinkResources = false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             proguardFile 'proguard-net.kibotu.pro'
             proguardFile 'proguard-retrolambda.pro'
@@ -78,7 +78,7 @@ dependencies {
     compile 'com.github.kibotu:net.kibotu.android.deviceinfo:1.2.1'
 
     // view utils
-    compile 'com.github.kibotu:common.android.utils:0.6.7'
+    compile 'com.github.kibotu:common.android.utils:0.6.9'
 
     // linq
     compile 'br.com.zbra:android-linq:1.0.1'
