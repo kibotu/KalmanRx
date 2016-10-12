@@ -16,12 +16,12 @@ import net.kibotu.kalmanrx.jama.Matrix;
 /**
  * Kalman filter (state).
  * <p>
- * The structure <code>JKalman</code> is used to keep 
- * Kalman filter state. It is created by constructor function, updated by 
+ * The structure <code>JKalman</code> is used to keep
+ * Kalman filter state. It is created by constructor function, updated by
  * <code>Predict</code> and <code>Correct</code> functions.
  * <p>
- * Normally, the structure is used for standard JKalman filter 
- * (notation and the formulae below are borrowed from the JKalman 
+ * Normally, the structure is used for standard JKalman filter
+ * (notation and the formulae below are borrowed from the JKalman
  * tutorial <a href="http://www.cs.unc.edu/~welch/kalman/">[Welch95]</a>):
  * <pre>
  * x<sub>k</sub>=A*x<sub>k-1</sub>+B*u<sub>k</sub>+w<sub>k</sub>
@@ -40,44 +40,72 @@ import net.kibotu.kalmanrx.jama.Matrix;
  * R - measurement noise covariance matrix, constant or variable
  * </pre>
  * <p>
- * In case of standard JKalman filter, all the matrices: A, B, H, Q and R 
+ * In case of standard JKalman filter, all the matrices: A, B, H, Q and R
  * are initialized once after JKalman structure is allocated via constructor.
- * However, the same structure and the same functions may be used to simulate 
- * extended JKalman filter by linearizing extended JKalman filter equation in the 
- * current system state neighborhood, in this case A, B, H (and, probably, 
+ * However, the same structure and the same functions may be used to simulate
+ * extended JKalman filter by linearizing extended JKalman filter equation in the
+ * current system state neighborhood, in this case A, B, H (and, probably,
  * Q and R) should be updated on every step.
  */
 public class JKalman {
 
-    /** number of measurement vector dimensions */
+    /**
+     * number of measurement vector dimensions
+     */
     int mp;
-    /** number of state vector dimensions */
+    /**
+     * number of state vector dimensions
+     */
     int dp;
-    /** number of control vector dimensions */
+    /**
+     * number of control vector dimensions
+     */
     int cp;
 
-    /** predicted state (x'(k)): x(k)=A*x(k-1)+B*u(k) */
+    /**
+     * predicted state (x'(k)): x(k)=A*x(k-1)+B*u(k)
+     */
     Matrix state_pre;
-    /** corrected state (x(k)): x(k)=x'(k)+K(k)*(z(k)-H*x'(k)) */
+    /**
+     * corrected state (x(k)): x(k)=x'(k)+K(k)*(z(k)-H*x'(k))
+     */
     Matrix state_post;
-    /** state transition matrix (A) */
+    /**
+     * state transition matrix (A)
+     */
     Matrix transition_matrix;
-    /** control matrix (B) (it is not used if there is no control)*/
+    /**
+     * control matrix (B) (it is not used if there is no control)
+     */
     Matrix control_matrix;
-    /** measurement matrix (H) */
+    /**
+     * measurement matrix (H)
+     */
     Matrix measurement_matrix;
-    /** process noise covariance matrix (Q) */
+    /**
+     * process noise covariance matrix (Q)
+     */
     Matrix process_noise_cov;
-    /** measurement noise covariance matrix (R) */
+    /**
+     * measurement noise covariance matrix (R)
+     */
     Matrix measurement_noise_cov;
-    /** priori error estimate covariance matrix (P'(k)): P'(k)=A*P(k-1)*At + Q) */
+    /**
+     * priori error estimate covariance matrix (P'(k)): P'(k)=A*P(k-1)*At + Q)
+     */
     Matrix error_cov_pre;
-    /** Kalman gain matrix (K(k)): K(k)=P'(k)*Ht*inv(H*P'(k)*Ht+R) */
+    /**
+     * Kalman gain matrix (K(k)): K(k)=P'(k)*Ht*inv(H*P'(k)*Ht+R)
+     */
     Matrix gain;
-    /** posteriori error estimate covariance matrix (P(k)): P(k)=(I-K(k)*H)*P'(k) */
+    /**
+     * posteriori error estimate covariance matrix (P(k)): P(k)=(I-K(k)*H)*P'(k)
+     */
     Matrix error_cov_post;
 
-    /** temporary matrices */
+    /**
+     * temporary matrices
+     */
     Matrix temp1;
     Matrix temp2;
     Matrix temp3;
@@ -85,13 +113,13 @@ public class JKalman {
     Matrix temp5;
 
     /**
-     * The construstor allocates JKalman filter and all its matrices and 
+     * The construstor allocates JKalman filter and all its matrices and
      * initializes them somehow.
+     *
      * @param dynam_params
      * @param measure_params
      * @param control_params
-     *
-     * @exception IllegalArgumentException Kalman filter dimensions exception.
+     * @throws IllegalArgumentException Kalman filter dimensions exception.
      */
     public JKalman(int dynam_params, int measure_params, int control_params)
             throws IllegalArgumentException {
@@ -145,16 +173,18 @@ public class JKalman {
 
     /**
      * Constructor in case of no control.
+     *
      * @param dynam_params
      * @param measure_params
      */
-    public JKalman(int dynam_params, int measure_params) throws Exception {
+    public JKalman(int dynam_params, int measure_params) throws IllegalArgumentException {
         this(dynam_params, measure_params, 0);
     }
 
 
     /**
      * Alias for prediction with no control.
+     *
      * @return Predict(no control).
      */
     public Matrix Predict() {
@@ -163,8 +193,8 @@ public class JKalman {
 
     /**
      * Estimates subsequent model state.
-     * <p> The function estimates the subsequent 
-     * stochastic model state by its current state and stores it at 
+     * <p> The function estimates the subsequent
+     * stochastic model state by its current state and stores it at
      * <code>state_pre</code>:
      * <pre>
      * x'<sub>k</sub>=A*x<sub>k</sub>+B*u<sub>k</sub>
@@ -178,8 +208,9 @@ public class JKalman {
      * P<sub>k-1</sub> is posteriori error covariance matrix on the previous step (error_cov_post)
      *     (should be initialized somehow in the beginning, identity matrix by default),
      * </pre>
-     * @param control Control vector (u<sub>k</sub>), should be NULL if there 
-     * is no external control (<code>control_params</code>=0).
+     *
+     * @param control Control vector (u<sub>k</sub>), should be NULL if there
+     *                is no external control (<code>control_params</code>=0).
      * @return The function returns the estimated state.
      */
     public Matrix Predict(Matrix control) {
@@ -203,7 +234,7 @@ public class JKalman {
 
     /**
      * Adjusts model state.
-     * The function <code>KalmanCorrect</code> adjusts stochastic model state 
+     * The function <code>KalmanCorrect</code> adjusts stochastic model state
      * on the basis of the given measurement of the model state:</p>
      * <pre>
      * K<sub>k</sub>=P'<sub>k</sub>*H<sup>T</sup>*(H*P'<sub>k</sub>*H<sup>T</sup>+R)<sup>-1</sup>
@@ -213,8 +244,9 @@ public class JKalman {
      * z<sub>k</sub> - given measurement (<code>mesurement</code> parameter)
      * K<sub>k</sub> - JKalman "gain" matrix.
      * </pre>
-     * <p>The function stores adjusted state at <code>state_post</code> and 
+     * <p>The function stores adjusted state at <code>state_post</code> and
      * returns it on output.
+     *
      * @param measurement Matrix containing the measurement vector.
      * @return
      */
@@ -251,6 +283,7 @@ public class JKalman {
 
     /**
      * Setter
+     *
      * @param state_pre
      */
     public void setState_pre(Matrix state_pre) {
@@ -259,6 +292,7 @@ public class JKalman {
 
     /**
      * Getter
+     *
      * @return
      */
     public Matrix getState_pre() {
@@ -267,6 +301,7 @@ public class JKalman {
 
     /**
      * Setter
+     *
      * @param state_post
      */
     public void setState_post(Matrix state_post) {
@@ -279,6 +314,7 @@ public class JKalman {
 
     /**
      * Getter
+     *
      * @param transition_matrix
      */
     public void setTransition_matrix(Matrix transition_matrix) {
@@ -291,6 +327,7 @@ public class JKalman {
 
     /**
      * Setter
+     *
      * @param control_matrix
      */
     public void setControl_matrix(Matrix control_matrix) {
@@ -299,6 +336,7 @@ public class JKalman {
 
     /**
      * Getter
+     *
      * @return
      */
     public Matrix getControl_matrix() {
@@ -307,6 +345,7 @@ public class JKalman {
 
     /**
      * Setter
+     *
      * @param measurement_matrix
      */
     public void setMeasurement_matrix(Matrix measurement_matrix) {
@@ -315,6 +354,7 @@ public class JKalman {
 
     /**
      * Getter
+     *
      * @return
      */
     public Matrix getMeasurement_matrix() {
@@ -323,6 +363,7 @@ public class JKalman {
 
     /**
      * Setter
+     *
      * @param process_noise_cov
      */
     public void setProcess_noise_cov(Matrix process_noise_cov) {
@@ -331,6 +372,7 @@ public class JKalman {
 
     /**
      * Getter
+     *
      * @return
      */
     public Matrix getProcess_noise_cov() {
@@ -339,6 +381,7 @@ public class JKalman {
 
     /**
      * Setter
+     *
      * @param measurement_noise_cov
      */
     public void setMeasurement_noise_cov(Matrix measurement_noise_cov) {
@@ -347,6 +390,7 @@ public class JKalman {
 
     /**
      * Getter
+     *
      * @return
      */
     public Matrix getMeasurement_noise_cov() {
@@ -355,6 +399,7 @@ public class JKalman {
 
     /**
      * Setter
+     *
      * @param error_cov_pre
      */
     public void setError_cov_pre(Matrix error_cov_pre) {
@@ -363,6 +408,7 @@ public class JKalman {
 
     /**
      * Getter
+     *
      * @return
      */
     public Matrix getError_cov_pre() {
@@ -371,6 +417,7 @@ public class JKalman {
 
     /**
      * Setter
+     *
      * @param gain
      */
     public void setGain(Matrix gain) {
@@ -379,6 +426,7 @@ public class JKalman {
 
     /**
      * Getter
+     *
      * @return
      */
     public Matrix getGain() {
@@ -387,6 +435,7 @@ public class JKalman {
 
     /**
      * Setter
+     *
      * @param error_cov_post
      */
     public void setError_cov_post(Matrix error_cov_post) {
@@ -395,6 +444,7 @@ public class JKalman {
 
     /**
      * Getter
+     *
      * @return
      */
     public Matrix getError_cov_post() {

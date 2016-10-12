@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import com.common.android.utils.logging.Logger;
 
 import net.kibotu.android.deviceinfo.library.Device;
+import net.kibotu.kalmanrx.app.ui.AccelerationSensorFragment;
+import net.kibotu.kalmanrx.app.ui.AccelerationSensorKalmanFragment;
+import net.kibotu.kalmanrx.app.ui.AccelerationSensorLowPassFragment;
 
 import java.util.List;
 
@@ -33,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         if (accelerometer == null)
             return;
 
-        replace(new AccelerationSensorRawFragment());
+        replace(new AccelerationSensorFragment());
 
         setFragmentContainerId(R.id.fragment_container2);
         replace(new AccelerationSensorLowPassFragment());

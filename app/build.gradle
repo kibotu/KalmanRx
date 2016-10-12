@@ -27,6 +27,7 @@ android {
             proguardFile 'proguard-net.kibotu.pro'
             proguardFile 'proguard-retrolambda.pro'
             proguardFile 'proguard-google-support.pro'
+            proguardFile 'proguard-rx.pro'
         }
     }
 

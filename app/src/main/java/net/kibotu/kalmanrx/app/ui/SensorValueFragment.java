@@ -1,7 +1,5 @@
-package net.kibotu.kalmanrx.app;
+package net.kibotu.kalmanrx.app.ui;
 
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,11 +13,15 @@ import com.common.android.utils.interfaces.LayoutProvider;
 import com.common.android.utils.interfaces.LogTag;
 import com.jjoe64.graphview.GraphView;
 
+import net.kibotu.kalmanrx.app.R;
+import net.kibotu.kalmanrx.app.misc.SensorDelay;
+import net.kibotu.kalmanrx.app.misc.SensorEventObservableFactory;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import rx.Subscription;
 
-import static net.kibotu.android.deviceinfo.library.services.SystemService.getSensorManager;
 import static net.kibotu.kalmanrx.app.R.layout.sensor;
 
 /**
@@ -42,9 +44,9 @@ public abstract class SensorValueFragment extends Fragment implements LayoutProv
     @BindView(R.id.graph)
     GraphView graphView;
 
-    protected SensorManager sensorManager;
-    protected SensorEventListener sensorEventListener;
     private Unbinder unbinder;
+
+    Subscription sensorSubscription;
 
     @Nullable
     @Override
@@ -62,19 +64,24 @@ public abstract class SensorValueFragment extends Fragment implements LayoutProv
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        sensorEventListener = createSensorEventListener();
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        registerSensor();
+        subscribeSensor();
     }
 
     @Override
     public void onPause() {
-        unregisterSensor();
         super.onPause();
+        unsubscribe();
+    }
+
+    protected void unsubscribe() {
+        if (sensorSubscription != null && sensorSubscription.isUnsubscribed())
+            sensorSubscription.unsubscribe();
     }
 
     @Override
@@ -83,20 +90,25 @@ public abstract class SensorValueFragment extends Fragment implements LayoutProv
         unbinder.unbind();
     }
 
-    protected void registerSensor() {
-        sensorManager = getSensorManager();
-        // SENSOR_DELAY_NORMAL, SENSOR_DELAY_UI, SENSOR_DELAY_GAME, or SENSOR_DELAY_FASTEST
-        sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(sensorType()), sensorDelay());
+    protected void subscribeSensor() {
+        unsubscribe();
+        sensorSubscription = createSensorSubscription();
     }
+
+    protected Subscription createSensorSubscription() {
+        return SensorEventObservableFactory
+                .createSensorEventObservable(sensorType(), sensorDelay())
+                .subscribe(sensorEvent -> process(sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]), Throwable::printStackTrace);
+    }
+
+    protected void process(float[] values) {
+        process(values[0], values[1], values[2]);
+    }
+
+    protected abstract void process(float x, float y, float z);
 
     @SensorDelay
     public abstract int sensorDelay();
-
-    protected void unregisterSensor() {
-        sensorManager.unregisterListener(sensorEventListener);
-    }
-
-    protected abstract SensorEventListener createSensorEventListener();
 
     protected abstract int sensorType();
 

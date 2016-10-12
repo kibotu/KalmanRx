@@ -1,8 +1,4 @@
-package net.kibotu.kalmanrx.app;
-
-import android.hardware.SensorEvent;
-
-import com.jjoe64.graphview.series.DataPoint;
+package net.kibotu.kalmanrx.app.ui;
 
 /**
  * Created by jan.rabe on 11/10/16.
@@ -14,11 +10,7 @@ public class AccelerationSensorLowPassFragment extends AccelerationSensorFragmen
     private float[] linear_acceleration = new float[3];
 
     @Override
-    protected void set(SensorEvent event) {
-        set(event.values[0], event.values[1], event.values[2]);
-    }
-
-    protected void set(final float x, final float y, final float z) {
+    protected void process(float x, float y, float z) {
 
         // In this example, alpha is calculated as t / (t + dT),
         // where t is the low-pass filter's time-constant and
@@ -36,13 +28,6 @@ public class AccelerationSensorLowPassFragment extends AccelerationSensorFragmen
         linear_acceleration[1] = y - gravity[1];
         linear_acceleration[2] = z - gravity[2];
 
-        xLabel.setText(String.valueOf(linear_acceleration[0]));
-        yLabel.setText(String.valueOf(linear_acceleration[1]));
-        zLabel.setText(String.valueOf(linear_acceleration[2]));
-
-        graph2LastXValue += 1d;
-        xSeries.appendData(new DataPoint(graph2LastXValue, linear_acceleration[0]), true, maxDataPoints);
-        ySeries.appendData(new DataPoint(graph2LastXValue, linear_acceleration[1]), true, maxDataPoints);
-        zSeries.appendData(new DataPoint(graph2LastXValue, linear_acceleration[2]), true, maxDataPoints);
+        addToGraph(linear_acceleration[0], linear_acceleration[1], linear_acceleration[2]);
     }
 }

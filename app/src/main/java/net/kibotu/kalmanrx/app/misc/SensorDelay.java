@@ -1,4 +1,4 @@
-package net.kibotu.kalmanrx.app;
+package net.kibotu.kalmanrx.app.misc;
 
 import android.support.annotation.IntDef;
 

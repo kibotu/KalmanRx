@@ -1,22 +1,23 @@
-package net.kibotu.kalmanrx.app;
+package net.kibotu.kalmanrx.app.misc;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.support.annotation.NonNull;
 
 import rx.Observable;
 import rx.android.MainThreadSubscription;
 
+import static net.kibotu.android.deviceinfo.library.services.SystemService.getSensorManager;
+
 /**
  * Allows to treat sensor events as Observable
- *
+ * <p>
  * Liberated: https://github.com/ArkadyGamza/ShakeDetector/tree/master/app/src/main/java/com/arkadygamza/shakedetector
  */
 public class SensorEventObservableFactory {
 
-    public static Observable<SensorEvent> createSensorEventObservable(@NonNull Sensor sensor, @NonNull SensorManager sensorManager, @SensorDelay int sensorDelay) {
+    public static Observable<SensorEvent> createSensorEventObservable(int sensorType, @SensorDelay int sensorDelay) {
         return Observable.create(subscriber -> {
             MainThreadSubscription.verifyMainThread();
 
@@ -36,7 +37,8 @@ public class SensorEventObservableFactory {
                 }
             };
 
-            sensorManager.registerListener(listener, sensor, sensorDelay);
+            final SensorManager sensorManager = getSensorManager();
+            sensorManager.registerListener(listener, sensorManager.getDefaultSensor(sensorType), sensorDelay);
 
             // unregister listener in main thread when being unsubscribed
             subscriber.add(new MainThreadSubscription() {
