@@ -14,19 +14,19 @@ Library is supporting up to 3 values smoothened from a stream.
 (float) stream
 
   
-    KalmanRx.createFrom1D(floatObservable..map(e -> e.values))
-            .subscribe(this::process, Throwable::printStackTrace);
+    KalmanRx.createFrom1D(floatObservable..map(e -> e.value))
+            .subscribe(value->{}, Throwable::printStackTrace);
 
 (float, float) stream
 
   
     KalmanRx.createFrom2D(floatObservable..map(e -> e.values))
-            .subscribe(this::process, Throwable::printStackTrace);
+            .subscribe(values->{}, Throwable::printStackTrace);
 
 (float, float) stream
 
     KalmanRx.createFrom3D(floatObservable..map(e -> e.values))
-            .subscribe(this::process, Throwable::printStackTrace);
+            .subscribe(value->{}, Throwable::printStackTrace);
 
 ## How to install
 
