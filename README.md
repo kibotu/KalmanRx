@@ -23,7 +23,7 @@ Library is supporting up to 3 values smoothened from a stream.
     KalmanRx.createFrom2D(floatObservable..map(e -> e.values))
             .subscribe(values->{}, Throwable::printStackTrace);
 
-(float, float) stream
+(float, float, float) stream
 
     KalmanRx.createFrom3D(floatObservable..map(e -> e.values))
             .subscribe(value->{}, Throwable::printStackTrace);
