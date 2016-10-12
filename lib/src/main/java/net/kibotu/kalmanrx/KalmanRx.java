@@ -157,4 +157,59 @@ public class KalmanRx {
             });
         });
     }
+
+    /**
+     * Applies low pass filter for (float,float,float) value stream.
+     *
+     * @param stream Float Stream.
+     * @return Observable.
+     */
+    public static Observable<float[]> createLowPassFilter(Observable<float[]> stream) {
+        return createLowPassFilter(stream, 0.8f);
+    }
+
+    public static Observable<float[]> createLowPassFilter(Observable<float[]> stream, final float alpha) {
+
+        final float[] output = new float[3];
+
+        final float[] gravity = new float[3];
+
+        return Observable.create(subscriber -> {
+
+            if (subscriber.isUnsubscribed()) {
+                return;
+            }
+
+            stream.subscribe(values -> {
+
+                // skip invalid values
+                if (values == null || values.length != 3)
+                    return;
+
+                // apply low pass filter
+                applyLowPassFilter(values, output, gravity, alpha);
+
+                // pass values
+                subscriber.onNext(output);
+            });
+        });
+    }
+
+    /**
+     * In this example, alpha is calculated as t / (t + dT),
+     * where t is the low-pass filter's time-constant and
+     * dT is the event delivery rate.
+     */
+    static void applyLowPassFilter(float[] input, float[] output, float[] gravity, float alpha) {
+
+        // Isolate the force of gravity with the low-pass filter.
+        gravity[0] = alpha * gravity[0] + (1 - alpha) * input[0];
+        gravity[1] = alpha * gravity[1] + (1 - alpha) * input[1];
+        gravity[2] = alpha * gravity[2] + (1 - alpha) * input[2];
+
+        // Remove the gravity contribution with the high-pass filter.
+        output[0] = input[0] - gravity[0];
+        output[1] = input[1] - gravity[1];
+        output[2] = input[2] - gravity[2];
+    }
 }
