@@ -7,7 +7,7 @@ Removes the noise from float streams using [Kalman Filter](https://en.wikipedia.
 
 ![Screenshot](https://raw.githubusercontent.com/kibotu/KalmanRx/master/screenshot.png) ![Screenshot](https://raw.githubusercontent.com/kibotu/KalmanRx/master/screenshot2.png)
 
-## How to use
+## [How to use](https://github.com/kibotu/KalmanRx/blob/master/app/src/main/java/net/kibotu/kalmanrx/app/ui/AccelerationSensorKalmanFragment.java#L16-L19)
 
 Library is supporting up to 3 values smoothened from a stream.
 
