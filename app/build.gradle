@@ -28,6 +28,7 @@ android {
             proguardFile 'proguard-retrolambda.pro'
             proguardFile 'proguard-google-support.pro'
             proguardFile 'proguard-rx.pro'
+            proguardFile 'proguard-graphview.pro'
         }
     }
 
