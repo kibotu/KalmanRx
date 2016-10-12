@@ -1,6 +1,6 @@
-package jama;
+package net.kibotu.kalmanrx.jama;
 
-import jama.util.Maths;
+import net.kibotu.kalmanrx.jama.util.Maths;
 
 /**
  * Eigenvalues and eigenvectors of a real matrix.
@@ -19,7 +19,7 @@ import jama.util.Maths;
  * A = V*D*inverse(V) depends upon V.cond().
  **/
 
-public class EigenvalueDecomposition implements java.io.Serializable {
+public class EigenValueDecomposition implements java.io.Serializable {
 
 /* ------------------------
    Class variables
@@ -876,7 +876,7 @@ public class EigenvalueDecomposition implements java.io.Serializable {
      * @return Structure to access D and V.
      */
 
-    public EigenvalueDecomposition(Matrix Arg) {
+    public EigenValueDecomposition(Matrix Arg) {
         double[][] A = Arg.getArray();
         n = Arg.getColumnDimension();
         V = new double[n][n];

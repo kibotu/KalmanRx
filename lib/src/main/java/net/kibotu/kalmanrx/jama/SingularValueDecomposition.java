@@ -1,6 +1,6 @@
-package jama;
+package net.kibotu.kalmanrx.jama;
 
-import jama.util.Maths;
+import net.kibotu.kalmanrx.jama.util.Maths;
 
 /**
  * Singular Value Decomposition.

@@ -1,4 +1,4 @@
-package jama.util;
+package net.kibotu.kalmanrx.jama.util;
 
 public class Maths {
     /**

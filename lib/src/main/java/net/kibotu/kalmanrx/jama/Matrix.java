@@ -1,4 +1,4 @@
-package jama;
+package net.kibotu.kalmanrx.jama;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
@@ -8,7 +8,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-import jama.util.Maths;
+import net.kibotu.kalmanrx.jama.util.Maths;
 
 /**
  * Jama = Java Matrix class.
@@ -52,9 +52,7 @@ import jama.util.Maths;
  * @author The MathWorks, Inc. and the National Institute of Standards and Technology.
  * @version 5 August 1998
  */
-public class
-
-Matrix implements Cloneable, java.io.Serializable {
+public class Matrix implements Cloneable, java.io.Serializable {
 
     /* ------------------------
    Class variables
@@ -810,7 +808,7 @@ Matrix implements Cloneable, java.io.Serializable {
      * LU Decomposition
      *
      * @return LUDecomposition
-     * @see jama.LUDecomposition
+     * @see net.kibotu.kalmanrx.jama.LUDecomposition
      */
     public LUDecomposition lu() {
         return new LUDecomposition(this);
@@ -820,7 +818,7 @@ Matrix implements Cloneable, java.io.Serializable {
      * QR Decomposition
      *
      * @return QRDecomposition
-     * @see jama.QRDecomposition
+     * @see net.kibotu.kalmanrx.jama.QRDecomposition
      */
     public QRDecomposition qr() {
         return new QRDecomposition(this);
@@ -830,7 +828,7 @@ Matrix implements Cloneable, java.io.Serializable {
      * Cholesky Decomposition
      *
      * @return CholeskyDecomposition
-     * @see jama.CholeskyDecomposition
+     * @see net.kibotu.kalmanrx.jama.CholeskyDecomposition
      */
     public CholeskyDecomposition chol() {
         return new CholeskyDecomposition(this);
@@ -840,7 +838,7 @@ Matrix implements Cloneable, java.io.Serializable {
      * Singular Value Decomposition
      *
      * @return SingularValueDecomposition
-     * @see jama.SingularValueDecomposition
+     * @see net.kibotu.kalmanrx.jama.SingularValueDecomposition
      */
     public SingularValueDecomposition svd() {
         return new SingularValueDecomposition(this);
@@ -849,11 +847,11 @@ Matrix implements Cloneable, java.io.Serializable {
     /**
      * Eigenvalue Decomposition
      *
-     * @return EigenvalueDecomposition
-     * @see jama.EigenvalueDecomposition
+     * @return EigenValueDecomposition
+     * @see EigenValueDecomposition
      */
-    public EigenvalueDecomposition eig() {
-        return new EigenvalueDecomposition(this);
+    public EigenValueDecomposition eig() {
+        return new EigenValueDecomposition(this);
     }
 
     /**

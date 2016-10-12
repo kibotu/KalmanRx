@@ -9,9 +9,9 @@
  * ***************************************************************************
  */
 
-package jkalman;
+package net.kibotu.kalmanrx.jkalman;
 
-import jama.Matrix;
+import net.kibotu.kalmanrx.jama.Matrix;
 
 /**
  * Kalman filter (state).
@@ -94,7 +94,7 @@ public class JKalman {
      * @exception IllegalArgumentException Kalman filter dimensions exception.
      */
     public JKalman(int dynam_params, int measure_params, int control_params)
-            throws Exception {
+            throws IllegalArgumentException {
 
         if (dynam_params <= 0 || measure_params <= 0) {
             throw new IllegalArgumentException("Kalman filter: Illegal dimensions.");

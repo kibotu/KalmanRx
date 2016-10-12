@@ -9,28 +9,22 @@
  * ***************************************************************************
  */
 
-package jkalman;
+package net.kibotu.kalmanrx.jkalman;
+
+import net.kibotu.kalmanrx.jama.Matrix;
+
+import org.junit.Test;
 
 import java.util.Random;
-
-import jama.Matrix;
 
 
 /**
  * JKalman TestBench
  */
 public class KalmanTest {
-    /**
-     * Constructor
-     */
-    public KalmanTest() {
-    }
 
-    /**
-     * Main method
-     * @param args
-     */
-    public static void main(String[] args) {
+    @Test
+    public void random() {
 
         try {
             JKalman kalman = new JKalman(4, 2);
@@ -44,7 +38,7 @@ public class KalmanTest {
 
             // init
             Matrix s = new Matrix(4, 1); // state [x, y, dx, dy, dxy]        
-            Matrix c = new Matrix(4, 1); // corrected state [x, y, dx, dy, dxy]                
+            Matrix c = new Matrix(4, 1); // corrected state [x, y, dx, dy, dxy]
 
             Matrix m = new Matrix(2, 1); // measurement [x]
             m.set(0, 0, x);

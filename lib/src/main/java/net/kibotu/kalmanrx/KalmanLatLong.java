@@ -3,7 +3,7 @@ package net.kibotu.kalmanrx;
 public class KalmanLatLong {
     private final float MinAccuracy = 1;
 
-    private float Q_metres_per_second;
+    private float Q_metres_per_second = 1;
     private long TimeStamp_milliseconds;
     private double lat;
     private double lng;

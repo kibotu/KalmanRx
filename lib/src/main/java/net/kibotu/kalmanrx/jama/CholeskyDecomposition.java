@@ -1,4 +1,4 @@
-package jama;
+package net.kibotu.kalmanrx.jama;
 
 /**
  * Cholesky Decomposition.
