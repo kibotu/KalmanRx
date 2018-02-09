@@ -1,6 +1,6 @@
 package net.kibotu.kalmanrx.app;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import com.common.android.utils.ContextHelper;
 import com.common.android.utils.logging.Logger;
@@ -11,7 +11,7 @@ import net.kibotu.android.deviceinfo.library.Device;
  * Created by jan.rabe on 11/10/16.
  */
 
-public class MainApplication extends Application {
+public class MainApplication extends MultiDexApplication {
 
     @Override
     public void onCreate() {

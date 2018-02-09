@@ -54,7 +54,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':lib')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    implementation 'com.android.support:multidex:1.0.2'
     implementation 'com.android.support:appcompat-v7:27.0.2'
 
     // ViewModel and LiveData
@@ -64,7 +65,7 @@ dependencies {
 
     // device utils
     implementation('com.github.kibotu:net.kibotu.android.deviceinfo:1.2.1') {
-        transitive true
+       transitive true
     }
 
     // view utils
@@ -81,5 +82,8 @@ dependencies {
 
     // chart
     implementation 'com.jjoe64:graphview:4.2.1'
+
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation project(':lib')
 
 }
