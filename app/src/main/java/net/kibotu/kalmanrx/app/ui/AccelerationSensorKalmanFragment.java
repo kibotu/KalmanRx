@@ -5,6 +5,8 @@ import net.kibotu.kalmanrx.app.misc.SensorEventObservableFactory;
 
 import rx.Observable;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by jan.rabe on 11/10/16.

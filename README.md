@@ -1,5 +1,5 @@
 [![Donation](https://img.shields.io/badge/donate-please-brightgreen.svg)](https://www.paypal.me/janrabe) [![About Jan Rabe](https://img.shields.io/badge/about-me-green.svg)](https://about.me/janrabe) 
-# KalmanRx [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-KalmanRx-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/4539) [![](https://jitpack.io/v/kibotu/KalmanRx.svg)](https://jitpack.io/#kibotu/KalmanRx) [![Javadoc](https://img.shields.io/badge/javadoc-SNAPSHOT-green.svg)](https://jitpack.io/com/github/kibotu/KalmanRx/master-SNAPSHOT/javadoc/index.html) [![Build Status](https://travis-ci.org/kibotu/KalmanRx.svg?branch=master)](https://travis-ci.org/kibotu/KalmanRx) [![API](https://img.shields.io/badge/API-15%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=15)  [![Gradle Version](https://img.shields.io/badge/gradle-3.1-green.svg)](https://docs.gradle.org/current/release-notes) [![Retrolambda](https://img.shields.io/badge/java-8-green.svg)](https://github.com/evant/gradle-retrolambda) [![Licence](https://img.shields.io/badge/licence-Apache%202-blue.svg)](https://raw.githubusercontent.com/kibotu/KalmanRx/master/LICENSE)
+# KalmanRx [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-KalmanRx-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/4539) [![](https://jitpack.io/v/kibotu/KalmanRx.svg)](https://jitpack.io/#kibotu/KalmanRx) [![Javadoc](https://img.shields.io/badge/javadoc-SNAPSHOT-green.svg)](https://jitpack.io/com/github/kibotu/KalmanRx/master-SNAPSHOT/javadoc/index.html) [![Build Status](https://travis-ci.org/kibotu/KalmanRx.svg?branch=master)](https://travis-ci.org/kibotu/KalmanRx) [![API](https://img.shields.io/badge/API-15%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=15)  [![Gradle Version](https://img.shields.io/badge/gradle-4.5.1-green.svg)](https://docs.gradle.org/current/release-notes) [![Licence](https://img.shields.io/badge/licence-Apache%202-blue.svg)](https://raw.githubusercontent.com/kibotu/KalmanRx/master/LICENSE)
 
 ## Introduction
 
@@ -42,9 +42,9 @@ Library is supporting up to 3 values smoothened from a stream.
     
 #### Build Requirements
 
-- JDK7, JDK8
-- Android Build Tools 24.0.3
-- Android SDK 24 
+- JDK8
+- Android Build Tools 27.0.3
+- Android SDK 27
 
 ## How to use
 
