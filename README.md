@@ -53,7 +53,7 @@ Library is supporting up to 3 values smoothened from a stream.
 
 [Jan Rabe](jan.rabe@kibotu.net)
 
-###License
+### License
 <pre>
 Copyright 2016 Jan Rabe
 
