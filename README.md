@@ -1,5 +1,5 @@
 [![Donation](https://img.shields.io/badge/buy%20me%20a%20coffee-brightgreen.svg)](https://www.paypal.me/janrabe/5) [![About Jan Rabe](https://img.shields.io/badge/about-me-green.svg)](https://about.me/janrabe) 
-# KalmanRx [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-KalmanRx-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/4539) [![](https://jitpack.io/v/kibotu/KalmanRx.svg)](https://jitpack.io/#kibotu/KalmanRx) [![](https://jitpack.io/v/kibotu/KalmanRx/month.svg)](https://jitpack.io/#kibotu/KalmanRx) [![Javadoc](https://img.shields.io/badge/javadoc-SNAPSHOT-green.svg)](https://jitpack.io/com/github/kibotu/KalmanRx/master-SNAPSHOT/javadoc/index.html) [![Build Status](https://travis-ci.org/kibotu/KalmanRx.svg?branch=master)](https://travis-ci.org/kibotu/KalmanRx) [![API](https://img.shields.io/badge/API-15%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=15)  [![Gradle Version](https://img.shields.io/badge/gradle-4.5.1-green.svg)](https://docs.gradle.org/current/release-notes) [![Licence](https://img.shields.io/badge/licence-Apache%202-blue.svg)](https://raw.githubusercontent.com/kibotu/KalmanRx/master/LICENSE)
+# KalmanRx [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-KalmanRx-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/4539) [![](https://jitpack.io/v/kibotu/KalmanRx.svg)](https://jitpack.io/#kibotu/KalmanRx) [![](https://jitpack.io/v/kibotu/KalmanRx/month.svg)](https://jitpack.io/#kibotu/KalmanRx) [![Javadoc](https://img.shields.io/badge/javadoc-SNAPSHOT-green.svg)](https://jitpack.io/com/github/kibotu/KalmanRx/master-SNAPSHOT/javadoc/index.html) [![Build Status](https://travis-ci.org/kibotu/KalmanRx.svg?branch=master)](https://travis-ci.org/kibotu/KalmanRx) [![API](https://img.shields.io/badge/API-15%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=15)  [![Gradle Version](https://img.shields.io/badge/gradle-5.4.0-green.svg)](https://docs.gradle.org/current/release-notes) [![Kotlin](https://img.shields.io/badge/kotlin-1.3.30-green.svg)](https://kotlinlang.org/) [![Licence](https://img.shields.io/badge/licence-Apache%202-blue.svg)](https://raw.githubusercontent.com/kibotu/KalmanRx/master/LICENSE) [![androidx](https://img.shields.io/badge/androidx-brightgreen.svg)](https://developer.android.com/topic/libraries/support-library/refactor)
 
 ## Introduction
 
@@ -13,7 +13,6 @@ Library is supporting up to 3 values smoothened from a stream.
 
 (float) stream
 
-  
     KalmanRx.createFrom1D(floatObservable..map(e -> e.value))
             .subscribe(value->{}, Throwable::printStackTrace);
 

@@ -1,7 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.getkeepsafe.dexcount'
 
 android {
 
@@ -15,28 +16,14 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        android {
-            lintOptions {
-                abortOnError false
-            }
-        }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments clearPackageData: 'true'
     }
 
     buildTypes {
-        debug {
-            debuggable true
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
         release {
-            debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            proguardFile 'proguard-net.kibotu.pro'
-            proguardFile 'proguard-google-support.pro'
-            proguardFile 'proguard-rx.pro'
         }
     }
 
@@ -49,31 +36,54 @@ android {
 
     // endregion
 
-    // region test options
+    // region lint options
 
-    testOptions {
-        unitTests.all {
-            jvmArgs '-noverify'
-            testLogging {
-                events "passed", "skipped", "failed", "standardOut", "standardError"
-                outputs.upToDateWhen { false }
-                showStandardStreams = true
-            }
-            ignoreFailures = true
-        }
-        unitTests.returnDefaultValues = true
-        unitTests.includeAndroidResources = true
+    lintOptions {
+        disable 'InvalidPackage'
+        abortOnError false        // true by default
+        checkAllWarnings false
+        checkReleaseBuilds false
+        ignoreWarnings true       // false by default
+        quiet true                // false by default
+    }
+
+    // endregion
+
+    // region dex options
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+        maxProcessCount 8
+    }
+
+    // endregion
+
+    // region adb options
+
+    adbOptions {
+        timeOutInMs 10 * 60 * 1000 // 10 minutes
+    }
+
+    // endregion
+
+    // region exclude duplicated meta inf files
+
+    packagingOptions {
+        exclude 'META-INF/library-core_release.kotlin_module'
     }
 
     // endregion
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-    testImplementation 'junit:junit:4.12'
-    // rx
+    implementation libs.kotlinJdk8
+    testImplementation testLibs.junit
     implementation 'io.reactivex:rxandroid:1.2.1'
 }
 
-apply from: 'https://gist.githubusercontent.com/kibotu/994c9cc65fe623b76b76fedfac74b34b/raw/65ee52482ba65050e015f4b00d8d2fc9172a10e8/javadoc.gradle'
+configurations.all {
+    resolutionStrategy.cacheDynamicVersionsFor 10, 'minutes'
+    resolutionStrategy.force libs.kotlinJdk8
+}
+
+apply from: "${project.rootDir}/Android-Dependencies/javadoc.gradle"

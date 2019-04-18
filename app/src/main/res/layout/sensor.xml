@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="10dp"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -7,38 +9,42 @@
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graph"
-        android:layout_weight="0.8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        app:layout_constraintBottom_toTopOf="@id/xLabel"
         android:layout_height="0dp" />
 
-    <LinearLayout
-        android:paddingTop="10dp"
-        android:layout_weight="0.2"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
+    <TextView
+        tools:text="X-Label"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/graph"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/xLabel"
+        android:layout_width="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/yLabel"
+        android:layout_height="wrap_content" />
 
-        <TextView
-            android:gravity="center"
-            android:layout_weight="0.3"
-            android:id="@+id/x"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+    <TextView
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/xLabel"
+        tools:text="Y-Label"
+        app:layout_constraintEnd_toStartOf="@id/zLabel"
+        app:layout_constraintTop_toBottomOf="@id/graph"
+        android:id="@+id/yLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-        <TextView
-            android:gravity="center"
-            android:layout_weight="0.3"
-            android:id="@+id/z"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+    <TextView
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="Z-Label"
+        app:layout_constraintStart_toEndOf="@id/yLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/graph"
+        android:id="@+id/zLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-        <TextView
-            android:gravity="center"
-            android:layout_weight="0.3"
-            android:id="@+id/y"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
