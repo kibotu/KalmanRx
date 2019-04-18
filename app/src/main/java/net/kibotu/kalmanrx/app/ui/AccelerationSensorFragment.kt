@@ -5,6 +5,7 @@ import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.View
 import com.exozet.android.core.extensions.resColor
+import com.exozet.android.core.utils.MathExtensions.radiansToDegrees
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import kotlinx.android.synthetic.main.sensor.*
@@ -51,13 +52,13 @@ open class AccelerationSensorFragment : SensorValueFragment() {
     }
 
     override fun process(x: Float, y: Float, z: Float) {
-        addToGraph(x, y, z)
+        addToGraph(x * radiansToDegrees, y * radiansToDegrees, z * radiansToDegrees)
     }
 
     private fun addToGraph(x: Float, y: Float, z: Float) {
-        xLabel.text = x.toString()
-        yLabel.text = y.toString()
-        zLabel.text = z.toString()
+        xLabel.text = String.format("%.2f", x)
+        yLabel.text = String.format("%.2f", y)
+        zLabel.text = String.format("%.2f", z)
         graph2LastXValue += 1
         xSeries.appendData(DataPoint(graph2LastXValue, x.toDouble()), true, maxDataPoints)
         ySeries.appendData(DataPoint(graph2LastXValue, y.toDouble()), true, maxDataPoints)
