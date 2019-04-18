@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.exozet.android.core.utils.FragmentExtensions.replace
 import com.exozet.android.core.utils.FragmentExtensions.setFragmentContainerId
 import net.kibotu.android.deviceinfo.library.Device
-import net.kibotu.kalmanrx.app.ui.AccelerationSensorFragment
-import net.kibotu.kalmanrx.app.ui.AccelerationSensorKalmanFragment
-import net.kibotu.kalmanrx.app.ui.AccelerationSensorLowPassFragment
+import net.kibotu.kalmanrx.app.ui.AccelerometerSensorKalmanFragment
+import net.kibotu.kalmanrx.app.ui.AccelerometerSensorLowPassFragment
+import net.kibotu.kalmanrx.app.ui.AzimuthFragment
 import net.kibotu.logger.LogcatLogger
 import net.kibotu.logger.Logger
 import net.kibotu.logger.Logger.logv
@@ -32,12 +32,12 @@ class MainActivity : AppCompatActivity() {
         // check if we have accelerometer
         val accelerometer = sensorList.firstOrNull { it.type == android.hardware.Sensor.TYPE_ACCELEROMETER } ?: return
 
-        replace(AccelerationSensorFragment())
+        replace(AzimuthFragment())
 
         setFragmentContainerId(R.id.fragment_container2)
-        replace(AccelerationSensorLowPassFragment())
+        replace(AccelerometerSensorLowPassFragment())
 
         setFragmentContainerId(R.id.fragment_container3)
-        replace(AccelerationSensorKalmanFragment())
+        replace(AccelerometerSensorKalmanFragment())
     }
 }

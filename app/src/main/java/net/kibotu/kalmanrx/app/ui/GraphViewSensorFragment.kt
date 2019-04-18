@@ -1,7 +1,5 @@
 package net.kibotu.kalmanrx.app.ui
 
-import android.hardware.Sensor
-import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.View
 import com.exozet.android.core.extensions.resColor
@@ -18,11 +16,7 @@ import net.kibotu.kalmanrx.app.R
  * [Using the Accelerometer](http://developer.android.com/guide/topics/sensors/sensors_motion.html#sensors-motion-accel)
  */
 
-open class AccelerationSensorFragment : SensorValueFragment() {
-
-    override val sensorDelay: Int = SensorManager.SENSOR_DELAY_UI
-
-    override val sensorType: Int = Sensor.TYPE_ACCELEROMETER
+abstract class GraphViewSensorFragment : SensorValueFragment() {
 
     lateinit var xSeries: LineGraphSeries<DataPoint>
 
@@ -55,7 +49,7 @@ open class AccelerationSensorFragment : SensorValueFragment() {
         addToGraph(x * radiansToDegrees, y * radiansToDegrees, z * radiansToDegrees)
     }
 
-    private fun addToGraph(x: Float, y: Float, z: Float) {
+    protected fun addToGraph(x: Float, y: Float, z: Float) {
         xLabel.text = String.format("%.2f", x)
         yLabel.text = String.format("%.2f", y)
         zLabel.text = String.format("%.2f", z)

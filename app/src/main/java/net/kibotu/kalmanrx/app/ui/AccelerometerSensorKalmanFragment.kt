@@ -1,19 +1,23 @@
 package net.kibotu.kalmanrx.app.ui
 
+import android.hardware.Sensor
+import android.hardware.SensorManager
 import net.kibotu.kalmanrx.KalmanRx
 
-import rx.Observable
 import rx.Subscription
 
 import net.kibotu.kalmanrx.app.misc.createSensorEventObservable
-import rx.functions.Action1
 
 
 /**
  * Created by [Jan Rabe](https://about.me/janrabe).
  */
 
-class AccelerationSensorKalmanFragment : AccelerationSensorFragment() {
+class AccelerometerSensorKalmanFragment : GraphViewSensorFragment() {
+
+    override val sensorDelay = SensorManager.SENSOR_DELAY_UI
+
+    override val sensorType = Sensor.TYPE_ACCELEROMETER
 
     override fun createSensorSubscription(): Subscription {
 

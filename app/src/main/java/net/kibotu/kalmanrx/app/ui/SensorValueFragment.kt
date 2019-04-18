@@ -46,7 +46,7 @@ abstract class SensorValueFragment : Fragment() {
 
     abstract fun process(x: Float, y: Float, z: Float)
 
-    fun process(values: FloatArray) = process(values[0], values[1], values[2])
+    open fun process(values: FloatArray) = process(values[0], values[1], values[2])
 
     private fun unsubscribe() {
         if (sensorSubscription?.isUnsubscribed == false)
