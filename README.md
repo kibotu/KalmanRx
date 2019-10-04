@@ -14,21 +14,21 @@ Library is supporting up to 3 values smoothened from a stream.
 (float) stream
 
 ```java
-KalmanRx.createFrom1D(floatObservable..map(e -> e.value))
+KalmanRx.createFrom1D(floatObservable.map(e -> e.value))
     .subscribe(value->{}, Throwable::printStackTrace);
 ```
 
 (float, float) stream
 
 ```java
-KalmanRx.createFrom2D(floatObservable..map(e -> e.values))
+KalmanRx.createFrom2D(floatObservable.map(e -> e.values))
     .subscribe(values->{}, Throwable::printStackTrace);
 ```
 
 (float, float, float) stream
 
 ```java
-KalmanRx.createFrom3D(floatObservable..map(e -> e.values))
+KalmanRx.createFrom3D(floatObservable.map(e -> e.values))
     .subscribe(value->{}, Throwable::printStackTrace);
 ```
 
