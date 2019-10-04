@@ -13,44 +13,56 @@ Library is supporting up to 3 values smoothened from a stream.
 
 (float) stream
 
-    KalmanRx.createFrom1D(floatObservable..map(e -> e.value))
-            .subscribe(value->{}, Throwable::printStackTrace);
+```java
+KalmanRx.createFrom1D(floatObservable..map(e -> e.value))
+    .subscribe(value->{}, Throwable::printStackTrace);
+```
 
 (float, float) stream
 
-  
-    KalmanRx.createFrom2D(floatObservable..map(e -> e.values))
-            .subscribe(values->{}, Throwable::printStackTrace);
+```java
+KalmanRx.createFrom2D(floatObservable..map(e -> e.values))
+    .subscribe(values->{}, Throwable::printStackTrace);
+```
 
 (float, float, float) stream
 
-    KalmanRx.createFrom3D(floatObservable..map(e -> e.values))
-            .subscribe(value->{}, Throwable::printStackTrace);
+```java
+KalmanRx.createFrom3D(floatObservable..map(e -> e.values))
+    .subscribe(value->{}, Throwable::printStackTrace);
+```
 
 ## How to install
 
-    compile 'com.github.kibotu:KalmanRx:-SNAPSHOT'
+```groovy
+    implementation 'com.github.kibotu:KalmanRx:-SNAPSHOT'
+```
 
 ## How to build
 
-    graldew clean build
-    
+```bash    
+graldew clean build
+```
+
 ### CI 
-    
-    gradlew clean assembleRelease test javadoc
-    
+
+```bash    
+gradlew clean assembleRelease test javadoc
+```
+
 #### Build Requirements
 
 - JDK8
 - Android Build Tools 27.0.3
 - Android SDK 27
 
-## How to use
+### Notes
 
+Follow me on Twitter: [@wolkenschauer](https://twitter.com/wolkenschauer)
 
-## Contributors
+Let me know what you think: [jan.rabe@kibotu.net](mailto:jan.rabe@kibotu.net)
 
-[Jan Rabe](jan.rabe@kibotu.net)
+Contributions welcome!
 
 ### License
 <pre>
