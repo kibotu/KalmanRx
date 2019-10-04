@@ -35,7 +35,7 @@ KalmanRx.createFrom3D(floatObservable..map(e -> e.values))
 ## How to install
 
 ```groovy
-    implementation 'com.github.kibotu:KalmanRx:-SNAPSHOT'
+implementation 'com.github.kibotu:KalmanRx:-SNAPSHOT'
 ```
 
 ## How to build
