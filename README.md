@@ -5,6 +5,20 @@
 
 Removes the noise from float streams using [Kalman Filter](https://en.wikipedia.org/wiki/Kalman_filter). Useful to smoothen sensory data e.g.: [gps location](https://github.com/villoren/KalmanLocationManager), or [Accelerometer](https://developer.android.com/guide/topics/sensors/sensors_motion.html#sensors-motion-accel). 
 
+is an open-source library for Android that provides a set of classes and utilities for implementing Kalman filtering in reactive programming applications using the RxJava library.
+
+Kalman filtering is a mathematical technique that is used to estimate the state of a dynamic system based on a series of noisy measurements. It is commonly used in signal processing, control systems, and navigation applications.
+
+The KalmanRx library provides a set of reactive operators that can be used to implement Kalman filtering in RxJava applications. These operators allow you to easily filter noisy data streams, estimate the state of dynamic systems, and make predictions about future states.
+
+Some of the key features of the KalmanRx library are:
+
+Integration with RxJava: The library is designed to work seamlessly with the RxJava library, which allows you to easily combine Kalman filtering with other reactive programming techniques.
+Support for multiple Kalman filter models: The library provides a set of pre-defined Kalman filter models that can be used to filter different types of data streams, including scalar, vector, and matrix data.
+Configurable filter parameters: The library allows you to configure the filter parameters, such as the process noise, measurement noise, and initial state, to optimize the filter performance for your specific application.
+Real-time filtering: The library is optimized for real-time applications, and provides a set of utilities to measure the filter performance, detect anomalies, and adjust the filter parameters in real-time.
+Overall, the KalmanRx library can be a useful tool for implementing Kalman filtering in reactive programming applications on the Android platform, especially for developers who are working with dynamic systems and noisy data streams.
+
 ![Screenshot](https://raw.githubusercontent.com/kibotu/KalmanRx/master/screenshot.png) ![Screenshot](https://raw.githubusercontent.com/kibotu/KalmanRx/master/screenshot2.png)
 
 ## [How to use](https://github.com/kibotu/KalmanRx/blob/master/app/src/main/java/net/kibotu/kalmanrx/app/ui/AccelerationSensorKalmanFragment.java#L16-L19)
